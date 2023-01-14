@@ -1,9 +1,5 @@
 from typing import List
 
-import cv2
-import mediapipe as mp
-import time
-
 # Config & Params
 CONST_Y_THRESHOLD_DOWN = 0.25
 CONST_Y_THRESHOLD_UP = 0.75 * CONST_Y_THRESHOLD_DOWN
