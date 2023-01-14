@@ -396,4 +396,5 @@ sketch
 # End of https://www.toptal.com/developers/gitignore/api/intellij,jupyternotebooks,python,react,flask
 
 # Custom
+.idea
 logs
