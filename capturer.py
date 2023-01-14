@@ -5,31 +5,7 @@ import cv2
 import mediapipe as mp
 import time
 
-
-# format mediapipe res to csv
-def format_pose(processed):
-    local_landmarks = processed.pose_landmarks.landmark
-    global_landmarks = processed.pose_world_landmarks.landmark
-
-    local_res = []
-    for land_mark in local_landmarks:
-        local_res.append({
-            "x": land_mark.x,
-            "y": land_mark.y,
-            "z": land_mark.z,
-            "vis": land_mark.visibility
-        })
-
-    global_res = []
-    for land_mark in global_landmarks:
-        global_res.append({
-            "x": land_mark.x,
-            "y": land_mark.y,
-            "z": land_mark.z,
-            "vis": land_mark.visibility
-        })
-    return local_res, global_res
-
+from movement import format_pose_to_df, format_pose_to_lst
 
 
 def capture(delay_time, output_path):
@@ -59,7 +35,7 @@ def capture(delay_time, output_path):
             results = pose.process(image)
 
             if time.time() - start_time >= delay_time:
-                local_lst, global_lst = format_pose(results)
+                local_lst, global_lst = format_pose_to_lst(results)
 
                 with open(f"{output_path}_local.json", "w") as outfile:
                     json.dump(local_lst, outfile)
